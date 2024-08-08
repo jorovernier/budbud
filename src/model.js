@@ -151,7 +151,7 @@ Card.init(
         type: DataTypes.STRING,
         allowNull: false
       },
-      bankName: {
+      cardBank: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -188,20 +188,20 @@ Account.init(
     }
 )
 
-User.belongsToMany(Expense, {through: 'user_ex'})
-Expense.belongsToMany(User, {through: 'user_ex'})
+User.hasMany(Expense, {foreignKey: 'userId'})
+Expense.belongsTo(User, {foreignKey: 'userId'})
 
-User.belongsToMany(Income, {through: 'user_in'})
-Income.belongsToMany(User, {through: 'user_in'})
+User.hasMany(Income, {foreignKey: 'userId'})
+Income.belongsTo(User, {foreignKey: 'userId'})
 
-User.belongsToMany(Card, {through: 'user_card'})
-Card.belongsToMany(User, {through: 'user_card'})
+User.hasMany(Card, {foreignKey: 'userId'})
+Card.belongsTo(User, {foreignKey: 'userId'})
 
-User.belongsToMany(Account, {through: 'user_acc'})
-Account.belongsToMany(User, {through: 'user_acc'})
+User.hasMany(Account, {foreignKey: 'userId'})
+Account.belongsTo(User, {foreignKey: 'userId'})
 
-Card.belongsToMany(Expense, {through: 'card_ex'})
-Expense.belongsToMany(Card, {through: 'card_ex'})
+Card.hasMany(Expense, {foreignKey: 'cardId'})
+Expense.belongsTo(Card, {foreignKey: 'cardId'})
 
 ExType.hasMany(Expense, {foreignKey: 'exTypeId'})
 Expense.belongsTo(ExType, {foreignKey: 'exTypeId'})
