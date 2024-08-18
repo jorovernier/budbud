@@ -1,5 +1,6 @@
-import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import {Link, Outlet} from 'react-router-dom'
+import { Button, Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Link, Outlet } from 'react-router-dom'
+import Logo from '../assets/budbud-logo.png'
 
 export default function NavBar() {
 
@@ -7,8 +8,7 @@ export default function NavBar() {
     <div>
       <Navbar className="bg-body-tertiary">
         <Container fluid>
-
-          <Navbar.Brand>:3</Navbar.Brand>
+          <Image src={Logo} height={50}/>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             
