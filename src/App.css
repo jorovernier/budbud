@@ -1,6 +1,7 @@
 #root {
   max-width: 100vw;
   height: 100vh;
+  /* background-color: #FAFFF8; */
 }
 
 .bg-reseda {
@@ -9,4 +10,37 @@
 
 .bg-peri {
   background-color: #BBB3DB;
+}
+
+.bg-tea {
+  background-color: #D0F1BF;
+}
+
+.bg-nyan {
+  background-color: #E0FFD2;
+}
+
+.dd:active {
+  background-color: rgb(99, 133, 90, .2) !important;
+}
+
+.ddlo:active {
+  background-color: #FFFFFF !important;
+}
+.ddlo:hover {
+  background-color: #FFFFFF !important;
+}
+
+.btn-reseda {
+  /* --bs-btn-font-weight: 600; */
+  --bs-btn-color: #FFFFFF;
+  --bs-btn-bg: #63855A;
+  --bs-btn-border-color: #63855A;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: rgb(99, 133, 90, .9);
+  --bs-btn-hover-border-color: rgb(99, 133, 90, .9);
+  --bs-btn-focus-shadow-rgb: #63855A;
+  --bs-btn-active-color: #FFFFFF;
+  --bs-btn-active-bg:rgb(99, 133, 90, .8);
+  --bs-btn-active-border-color:rgb(99, 133, 90, .8);
 }

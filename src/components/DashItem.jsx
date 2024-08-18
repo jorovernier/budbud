@@ -25,8 +25,8 @@ export default function DashItem ({title, data, setData}){
                     <h1>{title}</h1>
                 </Col>
                 <Col xs={3} className='d-flex justify-content-end'>
-                    <Button id={title +'-add'}><i className="bi bi-plus"></i></Button>
-                    <Button className='ms-1' id={title +'-del'}><i className="bi bi-trash3"></i></Button>
+                    <Button className='btn-reseda' id={title +'-add'}><i className="bi bi-plus"></i></Button>
+                    <Button className='ms-1 btn-reseda' id={title +'-del'}><i className="bi bi-trash3"></i></Button>
                 </Col>
             </Row>
             {display}
