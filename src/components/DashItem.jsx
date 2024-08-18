@@ -1,19 +1,19 @@
 import { Button, Col, Container, ListGroup, Row } from 'react-bootstrap'
 import ItemFactory from './ItemFactory'
 
-export default function DashItem ({title, data, setData}){
+export default function DashItem ({title, data, setData, show, del}){
     let display;
 
     if(title === 'Income' || title === 'Expenses'){
         display = (
             <ListGroup>
-                <ItemFactory arr={data} isList={true}/>
+                <ItemFactory arr={data} isList={true} del={del} title={title}/>
             </ListGroup>
         )
     } else {
         display = (
             <Row>
-                <ItemFactory arr={data} isList={false}/>
+                <ItemFactory arr={data} isList={false} del={del} title={title}/>
             </Row>
         )
     }
@@ -25,8 +25,7 @@ export default function DashItem ({title, data, setData}){
                     <h1>{title}</h1>
                 </Col>
                 <Col xs={3} className='d-flex justify-content-end'>
-                    <Button className='btn-reseda' id={title +'-add'}><i className="bi bi-plus"></i></Button>
-                    <Button className='ms-1 btn-reseda' id={title +'-del'}><i className="bi bi-trash3"></i></Button>
+                    <Button onClick={show} className='btn-reseda' id={title +'-add'}><i className="bi bi-plus"></i></Button>
                 </Col>
             </Row>
             {display}

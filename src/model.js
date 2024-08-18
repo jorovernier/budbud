@@ -114,7 +114,7 @@ ExType.init(
 
 Income.init(
     {
-      incomeId: {
+      inId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true

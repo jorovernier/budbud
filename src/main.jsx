@@ -14,10 +14,10 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} 
       loader={async () => {
-        const accounts = await axios.get('/accounts/1')
-        const cards = await axios.get('/cards/1')
-        const expenses = await axios.get('/expenses/1')
-        const income = await axios.get('/income/1')
+        const accounts = await axios.get('/accounts')
+        const cards = await axios.get('/cards')
+        const expenses = await axios.get('/expenses')
+        const income = await axios.get('/income')
         return {accounts: accounts.data, cards: cards.data, expenses: expenses.data, income: income.data}
       }} 
       />
