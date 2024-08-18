@@ -1,5 +1,5 @@
 import DashItem from './DashItem'
-import {Container, Col, Row} from 'react-bootstrap'
+import { Col, Row, Stack } from 'react-bootstrap'
 import { useLoaderData } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -23,31 +23,42 @@ export default function Dashboard (){
         return cleaned
     }
 
-    let [accts, setAccts] = useState(accounts)
-    let [crds, setCards] = useState(cards)
-    let [exps, setExps] = useState(cleanUp(expenses))
-    let [inc, setIncs] = useState(cleanUp(income))
+    const [accts, setAccts] = useState(accounts)
+    const [crds, setCards] = useState(cards)
+    const [exps, setExps] = useState(cleanUp(expenses))
+    const [inc, setIncs] = useState(cleanUp(income))
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Col>
-                        <DashItem title={'Accounts'} data={accts} setData={setAccts}/> 
-                    </Col>
-                    <Col>
-                        <DashItem title={'Cards'} data={crds} setData={setCards}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>   
-                        <DashItem title={'Expenses'} data={exps} setData={setExps}/>
-                    </Col>
-                    <Col>
-                        <DashItem title={'Income'} data={inc} setData={setIncs}/>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <Stack gap={4} className='p-5'>
+            <Row className='justify-content-evenly'>
+                <Col xs={6} className='rounded bg-body-secondary p-3'>
+                    <DashItem title={'Income'} data={inc} setData={setIncs}/>
+                </Col>
+                <Col xs={3} className='border border-4 border-black rounded'>
+                    chart
+                </Col>
+            </Row>
+
+            <Row className='justify-content-evenly'>
+                <Col xs={6} className='rounded bg-body-secondary p-3'>   
+                    <DashItem title={'Expenses'} data={exps} setData={setExps}/>
+                </Col>
+                <Col xs={3} className='border border-4 border-black rounded'>
+                    chart
+                </Col>
+            </Row>
+
+            <Row className='justify-content-evenly'>
+                <Col xs={10} className='rounded bg-body-secondary p-3'>
+                    <DashItem title={'Accounts'} data={accts} setData={setAccts}/> 
+                </Col>
+            </Row>
+
+            <Row className='justify-content-evenly'>
+                <Col xs={10} className='rounded bg-body-secondary p-3'>
+                    <DashItem title={'Cards'} data={crds} setData={setCards}/>
+                </Col>
+            </Row>
+        </Stack>
     )
 }

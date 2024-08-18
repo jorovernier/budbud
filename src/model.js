@@ -75,8 +75,16 @@ Expense.init(
         autoIncrement: true,
         primaryKey: true,
       },
+      exName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      exDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
       exAmount: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
       }
     },
@@ -109,10 +117,14 @@ Income.init(
       incomeId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
-      incomeAmount: {
-        type: DataTypes.INTEGER,
+      inDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      inAmount: {
+        type: DataTypes.FLOAT,
         allowNull: false
       }
     },
@@ -147,16 +159,20 @@ Card.init(
         autoIncrement: true,
         primaryKey: true,
       },
-      cardName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       cardBank: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      limit: {
+      cardName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      creditLimit: {
         type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      cardImage: {
+        type: DataTypes.TEXT,
         allowNull: false
       }
     },
@@ -173,12 +189,16 @@ Account.init(
         autoIncrement: true,
         primaryKey: true,
       },
+      acctBank: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       acctName: {
         type: DataTypes.STRING,
         allowNull: false
       },
       acctAmount: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
       }
     },
