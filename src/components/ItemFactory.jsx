@@ -1,4 +1,5 @@
-import { Button, Card, Col, ListGroup } from 'react-bootstrap'
+import Item from './Item'
+import InfoCard from './InfoCard'
 
 export default function ItemFactory ({arr, isList, del, title}){
 
@@ -21,24 +22,9 @@ export default function ItemFactory ({arr, isList, del, title}){
                     )
                 }
             })
-            return <ListGroup.Item key={Object.values(item)[0]} className="d-flex justify-content-around p-3">
-                    <Button onClick={del} className='btn-reseda' id={Object.values(item)[0]+'-del-'+title}><i className="bi bi-trash3" id={Object.values(item)[0]+'-i-'+title}></i></Button>
-                    {itemInfo}
-                   </ListGroup.Item>
+            return <Item key={Object.values(item)[0]} item={item} del={del} title={title} itemInfo={itemInfo} notIds={notIds}></Item>
         } else {
-            let isImage = item.cardImage ? 'rounded-top-4' : ''
-            return (
-                <Col xs={3} key={Object.values(item)[0]}>
-                    <Card className={isImage}>
-                        {item.cardImage && <Card.Img src={item.cardImage} />}
-                        <Card.Header className='fw-medium'>{Object.values(notIds[1])[0]}</Card.Header>
-                        <Card.Body>
-                            <Card.Subtitle>{Object.values(notIds[0])[0]}</Card.Subtitle>
-                            <Card.Text>{Object.keys(notIds[2])[0].split(/(?=[A-Z])/)[1] + ' $'+Object.values(notIds[2])[0]}</Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            )
+            return <InfoCard key={Object.values(item)[0]} item={item} del={del} title={title} notIds={notIds}></InfoCard>
         }
     })
     

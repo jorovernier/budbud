@@ -32,7 +32,7 @@ export default function Dashboard (){
     const [show, setShow] = useState(false)
     const [subType, setSubType] = useState('')
 
-    function resVacuum(data, title){
+    function resSwitch(data, title){
         switch(title) {
             case 'Income':
                 setIncs(cleanUp(data))
@@ -59,10 +59,12 @@ export default function Dashboard (){
         for(let i = 0; i < e.target.elements.length - 1; i++){
             formValues[e.target.elements[i].id] = e.target.elements[i].value
         }
-        
-        axios.post(`/${e.target.elements[2].name.split('-')[0]}`, formValues).then(() => {
+
+        let url = subType.endsWith('s') ? subType.slice(0, -1) : subType
+
+        axios.post(`/${url.toLowerCase()}`, formValues).then(() => {
             axios.get(`/${subType.toLowerCase()}`).then((res) => {
-                resVacuum(res.data, subType)
+                resSwitch(res.data, subType)
             })
         })
         
@@ -75,26 +77,25 @@ export default function Dashboard (){
     }
 
     function deleteItem(e){
-        let url = e.target.id.split('-')[2]
-        if(url.endsWith('s')){
-            axios.delete(`/${url.toLowerCase().slice(0, -1)}/${e.target.id.split('-')[0]}`).then(() => {
-                axios.get(`/${url.toLowerCase()}`).then((res) => {
-                    resVacuum(res.data, url)
-                })
+        let url = e.target.id.split('-')[2].endsWith('s') ? e.target.id.split('-')[2].slice(0, -1) : e.target.id.split('-')[2]
+        
+        axios.delete(`/${url.toLowerCase()}/${e.target.id.split('-')[0]}`).then(() => {
+            axios.get(`/${e.target.id.split('-')[2].toLowerCase()}`).then((res) => {
+                resSwitch(res.data, e.target.id.split('-')[2])
             })
-        } else {
-            axios.delete(`/${url.toLowerCase()}/${e.target.id.split('-')[0]}`).then(() => {
-                axios.get(`/${url.toLowerCase()}`).then((res) => {
-                    resVacuum(res.data, url)
-                })
-            })
-        }
+        })
     }
 
-    let formSubGroup;
+    let formGroup;
 
     if(subType === 'Income'){
-        formSubGroup = <Form.Group>
+        formGroup = <Form.Group>
+                            <Form.Label>Amount</Form.Label>
+                            <Form.Control id='amount' type="number" step=".01" required/>
+
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control id='date' type="date" required/>
+
                             <Form.Label>Income Type</Form.Label>
                             <Form.Select id='type' name='income-type' required>
                                 <option>Paycheck</option>
@@ -104,7 +105,16 @@ export default function Dashboard (){
                             </Form.Select>
                         </Form.Group>
     } else if(subType === 'Expenses'){
-        formSubGroup = <Form.Group>
+        formGroup = <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control id='name' type="text" required/>
+
+                            <Form.Label>Amount</Form.Label>
+                            <Form.Control id='amount' type="number" step=".01" required/>
+
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control id='date' type="date" required/>
+
                             <Form.Label>Expense Type</Form.Label>
                             <Form.Select id='type' name='expense-type' required>
                                 <option>Grocery</option>
@@ -115,18 +125,35 @@ export default function Dashboard (){
                                 <option>Fun</option>
                                 <option>Other</option>
                             </Form.Select>
+
                             <Form.Label>Card Used</Form.Label>
                             <Form.Select id='card' required>
                                 <option>1</option>
                                 <option>2</option>
                             </Form.Select>
-                            <Form.Label>Expense Name</Form.Label>
-                            <Form.Control id='name' type="text" required/>
                         </Form.Group>
     } else if(subType === 'Accounts'){
-        
+        formGroup = <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control id='name' type="text" required/>
+
+                            <Form.Label>Bank</Form.Label>
+                            <Form.Control id='bank' type="text" required/>
+
+                            <Form.Label>Amount</Form.Label>
+                            <Form.Control id='amount' type="number" step=".01" required/>
+                        </Form.Group>
     } else if(subType === 'Cards'){
-        
+        formGroup = <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control id='name' type="text" required/>
+
+                            <Form.Label>Bank</Form.Label>
+                            <Form.Control id='bank' type="text" required/>
+
+                            <Form.Label>Limit</Form.Label>
+                            <Form.Control id='limit' type="number" step=".01" required/>
+                        </Form.Group>
     }
 
     return (
@@ -139,28 +166,14 @@ export default function Dashboard (){
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form id='add-form' onSubmit={handleClose}>
-                        <Form.Group>
-                            <Form.Label>Amount</Form.Label>
-                            <Form.Control id='amount' type="number" required/>
+                    <Form id='add-form' className='d-flex flex-column' onSubmit={handleClose}>
+                        {formGroup}
 
-                            <Form.Label>Date</Form.Label>
-                            <Form.Control id='date' type="date" required/>
-                        </Form.Group>
-                        
-                        {formSubGroup}
-
-                        <Button className='btn-reseda' id='add-form-btn' type='submit'>
+                        <Button className='btn-reseda mt-3' id='add-form-btn' type='submit'>
                             Save Changes
                         </Button>
                     </Form>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    {/* <Button className='btn-reseda' id='add-form-btn' type='submit' onClick={handleClose}>
-                        Save Changes
-                    </Button> */}
-                </Modal.Footer>
 
             </Modal>
 

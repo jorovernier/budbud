@@ -31,6 +31,15 @@
   background-color: #FFFFFF !important;
 }
 
+.btn-delete {
+  height: 25px;
+  width: 25px;
+  padding: 0;
+}
+.btn-delete:hover{
+  display: block;
+}
+
 .btn-reseda {
   /* --bs-btn-font-weight: 600; */
   --bs-btn-color: #FFFFFF;
@@ -43,4 +52,18 @@
   --bs-btn-active-color: #FFFFFF;
   --bs-btn-active-bg:rgb(99, 133, 90, .8);
   --bs-btn-active-border-color:rgb(99, 133, 90, .8);
+}
+
+.btn-peri {
+  /* --bs-btn-font-weight: 600; */
+  --bs-btn-color: #FFFFFF;
+  --bs-btn-bg: #BBB3DB;
+  --bs-btn-border-color: #BBB3DB;
+  --bs-btn-hover-color: #FFFFFF;
+  --bs-btn-hover-bg: rgb(187, 179, 219, .9);
+  --bs-btn-hover-border-color: rgb(187, 179, 219, .9);
+  --bs-btn-focus-shadow-rgb: #BBB3DB;
+  --bs-btn-active-color: #FFFFFF;
+  --bs-btn-active-bg:rgb(187, 179, 219, .8);
+  --bs-btn-active-border-color:rgb(187, 179, 219, .8);
 }

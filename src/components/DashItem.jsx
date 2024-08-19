@@ -6,7 +6,7 @@ export default function DashItem ({title, data, setData, show, del}){
 
     if(title === 'Income' || title === 'Expenses'){
         display = (
-            <ListGroup>
+            <ListGroup className='mt-2 mb-2'>
                 <ItemFactory arr={data} isList={true} del={del} title={title}/>
             </ListGroup>
         )

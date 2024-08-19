@@ -173,7 +173,7 @@ Card.init(
       },
       cardImage: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
       }
     },
     {
