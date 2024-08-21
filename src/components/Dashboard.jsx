@@ -1,8 +1,11 @@
-import DashItem from './DashItem'
-import { Button, Col, Form, Modal, Row, Stack } from 'react-bootstrap'
+import { Button, Col, Container, Form, Modal, Row, Stack } from 'react-bootstrap'
 import { useLoaderData } from 'react-router-dom'
 import { useState } from 'react'
+import Chart from "chart.js/auto";
 import axios from 'axios'
+
+import DashItem from './DashItem'
+import PieChart from './PieChart'
 
 export default function Dashboard (){
     const {accounts, cards, expenses, income} = useLoaderData()
@@ -158,7 +161,7 @@ export default function Dashboard (){
 
     return (
 
-        <Stack gap={4} className='p-5'>
+        <Stack gap={5} className='p-5'>
 
             <Modal show={show} onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
@@ -178,34 +181,61 @@ export default function Dashboard (){
             </Modal>
 
             <Row className='justify-content-evenly'>
-                <Col xs={6} className='rounded bg-body-secondary p-3'>
-                    <DashItem title={'Income'} data={inc} setData={setIncs} show={handleShow} del={deleteItem}/>
+
+                <Col xs={6} className='p-0'>
+                    <Col className='rounded bg-body-secondary p-3'>
+                        <DashItem title={'Accounts'} data={accts} setData={setAccts} show={handleShow} del={deleteItem}/>
+                    </Col>
+                    <Col className='rounded bg-body-secondary p-3 mt-4'>
+                        <DashItem title={'Cards'} data={crds} setData={setCards} show={handleShow} del={deleteItem}/>
+                    </Col>
                 </Col>
-                <Col xs={3} className='border border-4 border-black rounded'>
-                    chart
+
+
+                <Col xs={3} className='rounded bg-body-secondary p-3'> 
+                    <Container>
+                        <Row className='align-items-center'>
+                            <Col>
+                                <h1>Snapshot</h1>
+                            </Col>
+                        </Row>
+                        <Stack gap={3}>
+                            <PieChart data={exps}/>
+                            <Col>
+                                <h2>Total Expenses: {exps.map((exp) => exp.exAmount).reduce((a, c) => a + c).toFixed(2)}</h2>
+                            </Col>
+                            <Col>
+                                <h2>Total Income: {inc.map((inco) => inco.inAmount).reduce((a, c) => a + c).toFixed(2)}</h2>
+                            </Col>
+                            <Col>
+                                <h2>Net Worth: {accts.map((acct) => acct.acctAmount).reduce((a, c) => a + c).toFixed(2)}</h2>
+                            </Col>
+                        </Stack>
+                    </Container>
                 </Col>
+
             </Row>
 
             <Row className='justify-content-evenly'>
-                <Col xs={6} className='rounded bg-body-secondary p-3'>   
+                <Col xs={10} className='rounded bg-body-secondary p-3'>   
                     <DashItem title={'Expenses'} data={exps} setData={setExps} show={handleShow} del={deleteItem}/>
                 </Col>
-                <Col xs={3} className='border border-4 border-black rounded'>
-                    chart
-                </Col>
             </Row>
 
             <Row className='justify-content-evenly'>
                 <Col xs={10} className='rounded bg-body-secondary p-3'>
-                    <DashItem title={'Accounts'} data={accts} setData={setAccts} show={handleShow} del={deleteItem}/> 
+                    <DashItem title={'Income'} data={inc} setData={setIncs} show={handleShow} del={deleteItem}/>
                 </Col>
             </Row>
 
-            <Row className='justify-content-evenly'>
-                <Col xs={10} className='rounded bg-body-secondary p-3'>
+            {/* <Row className='justify-content-evenly'>
+                <Col xs={6} className='rounded bg-body-secondary p-3'>
                     <DashItem title={'Cards'} data={crds} setData={setCards} show={handleShow} del={deleteItem}/>
                 </Col>
-            </Row>
+                <Col xs={3} className='d-flex justify-content-center align-items-center'>
+                    <PieChart data={exps}/>
+                </Col>
+            </Row> */}
         </Stack>
     )
 }

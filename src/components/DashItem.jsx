@@ -6,13 +6,13 @@ export default function DashItem ({title, data, setData, show, del}){
 
     if(title === 'Income' || title === 'Expenses'){
         display = (
-            <ListGroup className='mt-2 mb-2'>
+            <ListGroup className='mt-2 mb-2 pt-2'>
                 <ItemFactory arr={data} isList={true} del={del} title={title}/>
             </ListGroup>
         )
     } else {
         display = (
-            <Row>
+            <Row className='d-flex flex-nowrap overflow-x-scroll pt-2'>
                 <ItemFactory arr={data} isList={false} del={del} title={title}/>
             </Row>
         )
